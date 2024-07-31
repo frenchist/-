@@ -49,7 +49,7 @@ Node* insert(int& d, Node*& h) {
 	h = temp; // 更新 head 为新节点
 	return h;
 }
-void* insert(int& d, Node** h) {
+void insert(int& d, Node** h) {
 	Node* temp = new Node();
 	temp->data = d;
 	temp->next = NULL;
