@@ -1,0 +1,111 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<iostream>
+using namespace std;
+//c风格
+/*struct Node {
+	int data;
+	struct Node* link
+};*/
+
+struct Node {
+	int data;
+	struct Node* next;
+};
+//struct Node* head;//在全局区创建结构体对象
+//void insert(int& d) {
+//	Node* temp = new Node();
+//	temp->data = d;
+//	temp->next = NULL;
+//	
+//	temp->next = head; // 将新节点的 next 指针指向当前的 head
+//	head = temp; // 更新 head 为新节点
+//
+//	
+//
+//
+//}
+/*void insert(int& d, Node*& h)
+你的代码中 insert 函数的实现有一个问题。
+你传递的是 Node* h，但是在函数内部你修改的是 h 的副本，
+而不是 main 函数中的 head。
+这意味着 head 不会被更新。为了解决这个问题，
+你需要传递一个指向指针的引用。
+
+{
+	Node* temp = new Node();
+	temp->data = d;
+	temp->next = NULL;
+
+	temp->next = h; // 将新节点的 next 指针指向当前的 head
+	h = temp; // 更新 head 为新节点
+}*/
+Node* insert(int& d, Node*& h) {
+	Node* temp = new Node();
+	temp->data = d;
+	temp->next = NULL;
+
+	temp->next = h; // 将新节点的 next 指针指向当前的 head
+	h = temp; // 更新 head 为新节点
+	return h;
+}
+void* insert(int& d, Node** h) {
+	Node* temp = new Node();
+	temp->data = d;
+	temp->next = NULL;
+	temp->next = *h;
+	*h = temp;
+	
+}
+
+//void print() {
+//	struct Node* temp = head;
+//	while (temp != NULL) {
+//		std::cout << temp->data << "\n";
+//		temp = temp->next;
+//	}
+//	
+//}
+//void print(Node*& h)
+void print(Node* h)
+
+{
+	
+	while (h != NULL) {
+		std::cout << h->data << "\n";
+		h = h->next;
+	}
+
+}
+
+
+int main() {
+	/*Node* A;
+	A = NULL; 
+	Node *temp =(Node)malloc(sizeof(Node))*/
+	/*Node* A;
+	Node *temp = new Node();
+	temp->data = 2;
+	temp->link = NULL;
+	A = temp;
+	temp = new Node();
+	temp->data = 4;
+	temp->link = NULL;
+	*/
+	//局部变量
+	Node *head = NULL;//链表为空empty list
+	printf("how many numbers?\n");
+	int n, i,x;
+	std::cin >> n;
+	for (i = 0; i < n; i++) {
+		printf("enter the number\n");
+		std::cin >> x;
+		//insert(x,head);
+		//或者我们可以修改insert函数的返回值
+		// 将其改为Node类型
+		insert(x, &head);
+		//head = insert(x, head);
+		//print();//全局变量的时候可用这个
+		print(head);
+	}
+}
